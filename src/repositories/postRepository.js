@@ -1,37 +1,37 @@
 import Post from "../schema/post.js";
 
-export const createPost = async (caption, image, user) => {
+export async function createPost(caption, image, user) {
   try {
     const newPost = await Post.create({ caption, image, user });
     return newPost;
   } catch (error) {
     console.log(error);
   }
-};
+}
 
-export const findAllPosts = async () => {
+export async function findAllPosts() {
   try {
     const posts = await Post.find();
     return posts;
   } catch (error) {
     console.log(error);
   }
-};
+}
 
-export const findPostById = async (id) => {
+export async function findPostById(id) {
   try {
-    const post = Post.findById(id);
+    const post = Post.find(id);
+    return post;
+  } catch (error) {
+    console.loh(error);
+  }
+}
+
+export async function findPostByID(id) {
+  try {
+    const post = Post.findByIdAndDelete(id);
     return post;
   } catch (error) {
     console.log(error);
   }
-};
-
-export const deletePostById = async (id)=>{
-    try {
-        const post = await Post.findByIdAndDelete(id);
-        return post
-    } catch (error) {
-        console.log(error);
-    }
 }
