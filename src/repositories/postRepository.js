@@ -9,10 +9,19 @@ export async function createPost(caption, image, user) {
   }
 }
 
-export async function findAllPosts() {
+export async function findAllPosts(offset, limit) {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find().sort({ createdAt : -1 }).skip(offset).limit(limit);
     return posts;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function countAllPosts(){
+  try {
+    const totalPosts = await Post.countDocuments();
+    return totalPosts;
   } catch (error) {
     console.log(error);
   }
