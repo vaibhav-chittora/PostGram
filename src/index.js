@@ -1,8 +1,6 @@
 import express from "express";
 import connectDB from "./config/dbConfig.js";
-import { createPost } from "./controllers/postController.js";
-import { s3Uploader } from "./config/multerConfig.js";
-
+import apiRouter  from "./routers/apiRouter.js"
 
 const PORT = 3000;
 const app = express();
@@ -15,8 +13,8 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-//create post
-app.post("/posts", s3Uploader.single('image'), createPost);
+app.use('/api', apiRouter);
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
