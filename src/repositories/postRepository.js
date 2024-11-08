@@ -11,14 +11,17 @@ export async function createPost(caption, image, user) {
 
 export async function findAllPosts(offset, limit) {
   try {
-    const posts = await Post.find().sort({ createdAt : -1 }).skip(offset).limit(limit);
+    const posts = await Post.find()
+      .sort({ createdAt: -1 })
+      .skip(offset)
+      .limit(limit);
     return posts;
   } catch (error) {
     console.log(error);
   }
 }
 
-export async function countAllPosts(){
+export async function countAllPosts() {
   try {
     const totalPosts = await Post.countDocuments();
     return totalPosts;
@@ -32,13 +35,22 @@ export async function findPostById(id) {
     const post = Post.find(id);
     return post;
   } catch (error) {
-    console.loh(error);
+    console.log(error);
   }
 }
 
-export async function findPostByID(id) {
+export async function deletePostById(id) {
   try {
     const post = Post.findByIdAndDelete(id);
+    return post;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function updatePostById(id, updateObject) {
+  try {
+    const post = Post.findByIdAndUpdate(id, updateObject, { new: true });
     return post;
   } catch (error) {
     console.log(error);
