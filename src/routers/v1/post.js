@@ -6,10 +6,17 @@ import {
   findAllPosts,
   updatePost,
 } from "../../controllers/postController.js";
+import { validate } from "../../validators/zodValidator.js";
+import { zodPostSchema } from "../../validators/zodPostSchema.js";
 
 const router = express.Router();
 
-router.post("/", s3Uploader.single("image"), createPost);
+router.post(
+  "/",
+  s3Uploader.single("image"),
+  validate(zodPostSchema),
+  createPost
+);
 
 router.get("/", findAllPosts);
 

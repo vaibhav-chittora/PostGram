@@ -32,7 +32,7 @@ export async function countAllPosts() {
 
 export async function findPostById(id) {
   try {
-    const post = Post.find(id);
+    const post = await Post.find(id);
     return post;
   } catch (error) {
     console.log(error);
@@ -41,7 +41,7 @@ export async function findPostById(id) {
 
 export async function deletePostById(id) {
   try {
-    const post = Post.findByIdAndDelete(id);
+    const post = await Post.findByIdAndDelete(id);
     return post;
   } catch (error) {
     console.log(error);
@@ -50,7 +50,7 @@ export async function deletePostById(id) {
 
 export async function updatePostById(id, updateObject) {
   try {
-    const post = Post.findByIdAndUpdate(id, updateObject, { new: true });
+    const post = await Post.findByIdAndUpdate(id, updateObject, { new: true });
     return post;
   } catch (error) {
     console.log(error);
