@@ -1,4 +1,10 @@
-import { countAllPosts, createPost, deletePostById, findAllPosts, updatePostById, } from "../repositories/postRepository.js";
+import {
+  countAllPosts,
+  createPost,
+  deletePostById,
+  findAllPosts,
+  updatePostById,
+} from "../repositories/postRepository.js";
 
 export const createPostService = async (createPostObject) => {
   try {
@@ -9,7 +15,7 @@ export const createPostService = async (createPostObject) => {
 
     return post;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 };
 
@@ -40,6 +46,6 @@ export const deletePostByIdService = async (id) => {
 export const updatePostByIdService = async (id, updateObject) => {
   //call the repository layer function
   const post = await updatePostById(id, updateObject);
-  console.log("Updated Post - ", post)
+  console.log("Updated Post - ", post);
   return post;
 };
