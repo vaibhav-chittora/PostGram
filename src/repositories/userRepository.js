@@ -23,7 +23,7 @@ export const createUser = async (userObject) => {
     const newUser = await User.create(userObject);
     return newUser;
   } catch (error) {
-    throw error;
     console.log(error);
+    throw error;
   }
 };
