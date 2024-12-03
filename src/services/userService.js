@@ -50,6 +50,7 @@ export const signInUserService = async (userDetails) => {
       email: user.email,
       _id: user._id,
       username: user.username,
+      role: user.role || "user",
     });
 
     return token;
