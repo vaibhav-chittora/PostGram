@@ -12,6 +12,16 @@ import { isAdmin, isAuthenticated } from "../../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
+/**
+ * @openapi
+ * /posts:
+ *   post:
+ *     description: Create a new post
+ *     responses:
+ *       201:
+ *         description: Post Created
+ *
+ */
 router.post(
   "/",
   isAuthenticated,
@@ -20,8 +30,28 @@ router.post(
   createPost
 );
 
+/**
+ * @openapi
+ * /findAllPosts:
+ *   get:
+ *     description: Get all posts
+ *     responses:
+ *       200:
+ *         description: Posts Found
+ *
+ */
+
 router.get("/", findAllPosts);
 
+/**
+ * @openapi
+ * /posts/{id}:
+ *    put:
+ *      description: Update a post
+ *      responses:
+ *        201:
+ *          description: Post Updated
+ */
 router.put(
   "/:id",
   isAuthenticated,
@@ -30,6 +60,15 @@ router.put(
   updatePost
 );
 
+/**
+ * @openapi
+ * /posts/{id}:
+ *    delete:
+ *      description: Delete a post
+ *      responses:
+ *        204:
+ *          description: Post Deleted
+ */
 router.delete("/:id", isAuthenticated, deletePost);
 
 export default router;
