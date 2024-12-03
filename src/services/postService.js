@@ -3,6 +3,7 @@ import {
   createPost,
   deletePostById,
   findAllPosts,
+  findPostById,
   updatePostById,
 } from "../repositories/postRepository.js";
 
@@ -35,7 +36,15 @@ export const findAllPostsService = async (offset, limit) => {
 };
 
 // delete Post service
-export const deletePostByIdService = async (id) => {
+export const deletePostByIdService = async (id, user) => {
+  const post = await findPostById(id);
+  if (post.user != user) {
+    throw {
+      status: 401,
+      message: "Unauthorized",
+    };
+  }
+
   //call the repository layer function
   const response = await deletePostById(id);
   console.log("Deleted Response - ", response);

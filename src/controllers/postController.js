@@ -54,7 +54,8 @@ export async function findAllPosts(req, res) {
 export async function deletePost(req, res) {
   try {
     const postId = req.params.id;
-    const deletedPost = await deletePostByIdService(postId);
+    const deletedPost = await deletePostByIdService(postId, req.user._id);
+    console.log("Req user in delete post - ", req.user);
     if (!deletedPost) {
       return res.status(404).json({
         success: false,
@@ -68,6 +69,12 @@ export async function deletePost(req, res) {
     });
   } catch (error) {
     console.log(error);
+    if (error.status) {
+      return res.status(error.status).json({
+        success: false,
+        message: error.message,
+      });
+    }
     res.status(500).json({
       success: false,
       message: "Internal Server Error.",
