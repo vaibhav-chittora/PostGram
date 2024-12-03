@@ -10,8 +10,8 @@ export const createPostService = async (createPostObject) => {
   try {
     const caption = createPostObject.caption?.trim();
     const image = createPostObject.image;
-    const post = await createPost(caption, image);
-    //   const user = createPostObject.user;
+    const user = createPostObject.user;
+    const post = await createPost(caption, image, user);
 
     return post;
   } catch (error) {

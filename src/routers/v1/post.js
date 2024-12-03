@@ -8,11 +8,13 @@ import {
 } from "../../controllers/postController.js";
 import { validate } from "../../validators/zodValidator.js";
 import { zodPostSchema } from "../../validators/zodPostSchema.js";
+import { isAuthenticated } from "../../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
 router.post(
   "/",
+  isAuthenticated,
   s3Uploader.single("image"),
   validate(zodPostSchema),
   createPost
