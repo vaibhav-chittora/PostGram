@@ -8,7 +8,7 @@ import {
 } from "../../controllers/postController.js";
 import { validate } from "../../validators/zodValidator.js";
 import { zodPostSchema } from "../../validators/zodPostSchema.js";
-import { isAuthenticated } from "../../middlewares/authMiddleware.js";
+import { isAdmin, isAuthenticated } from "../../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
@@ -22,7 +22,13 @@ router.post(
 
 router.get("/", findAllPosts);
 
-router.put("/:id", s3Uploader.single("image"), updatePost);
+router.put(
+  "/:id",
+  isAuthenticated,
+  isAdmin,
+  s3Uploader.single("image"),
+  updatePost
+);
 
 router.delete("/:id", isAuthenticated, deletePost);
 
