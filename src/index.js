@@ -18,7 +18,7 @@ app.use("/api", apiRouter);
 const swaggerDocs = swaggerJSDoc(options);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-app.get("/ping", isAuthenticated, (req, res) => {
+app.get("/ping", (req, res) => {
   console.log(req.user);
   return res.json({
     message: "Pong, the server is Up.",
